@@ -26,11 +26,11 @@ async def make_call_list(numbers: list[str], name: list[str], mobile: list[str],
             lkapi = api.LiveKitAPI(url=LIVEKIT_URL,
                     api_key=LIVEKIT_API_KEY,
                     api_secret=LIVEKIT_API_SECRET)
-            for number, account_id in zip(numbers, name, mobile, ca, address, amount, date, overdue):
-                number = "+91" + number
+            for a,b,c,d,e,f,g,h in zip(numbers, name, mobile, ca, address, amount, date, overdue):
+                number = "+91" + a
                 room_name = f"{number}-{agent_name}-room"
                 room_name = room_name.encode("utf-8", errors="ignore").decode("utf-8")
-                metadata = json.dumps({"phone_number": number, "mobile_last4": mobile, "ca_number": ca, "service_address": address, "outstanding_amount": amount, "due_date": date, "overdue_days": overdue})
+                metadata = json.dumps({"phone_number": a, "name":b, "mobile_last4": c, "ca_number": d, "service_address": e, "outstanding_amount": f, "due_date": g, "overdue_days": h})
                 await lkapi.agent_dispatch.create_dispatch(
                     api.CreateAgentDispatchRequest(
                         agent_name=agent_name, room=room_name, metadata=metadata
